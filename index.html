@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAJPUT Store - Shop Now</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <h1>RAJPUT <span>Store</span></h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search for products...">
+                <button onclick="searchProducts()">Search</button>
+            </div>
+            <div class="header-actions">
+                <button onclick="showLoginModal()" class="btn">Login</button>
+                <button onclick="toggleCart()" class="cart-btn">
+                    Cart (<span id="cart-count">0</span>)
+                </button>
+                <button onclick="showAdminModal()" class="btn admin-btn">Admin</button>
+            </div>
+        </div>
+        <nav class="categories">
+            <ul>
+                <li onclick="filterCategory('all')">All</li>
+                <li onclick="filterCategory('electronics')">Electronics</li>
+                <li onclick="filterCategory('fashion')">Fashion</li>
+                <li onclick="filterCategory('home')">Home & Kitchen</li>
+                <li onclick="filterCategory('books')">Books</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Banner -->
+        <div class="hero">
+            <h2>Welcome to RAJPUT Store</h2>
+            <p>Discover premium products with unbeatable prices</p>
+            <button onclick="document.getElementById('products-section').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+        </div>
+
+        <!-- Products Section -->
+        <section id="products-section" class="products-section">
+            <h2>Featured Products</h2>
+            <div id="products-container" class="products-grid"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 RAJPUT Store. All rights reserved.</p>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideLoginModal()">&times;</span>
+            <h2 id="modal-title">Login</h2>
+            <form id="auth-form" onsubmit="handleAuth(event)">
+                <input type="text" id="full-name" placeholder="Full Name" required>
+                <input type="email" id="email" placeholder="Gmail" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="auth-btn">Login</button>
+                <p onclick="toggleAuthMode()" id="toggle-text">Don't have an account? Register</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content cart-modal">
+            <span class="close" onclick="hideCartModal()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <strong>Total: $<span id="cart-total">0</span></strong>
+            </div>
+            <button onclick="showCheckoutModal()" class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideCheckoutModal()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form" onsubmit="handleCheckout(event)">
+                <input type="text" id="customer-name" placeholder="Full Name" required>
+                <input type="email" id="customer-email" placeholder="Gmail" required>
+                <input type="tel" id="customer-phone" placeholder="Phone Number" required>
+                <textarea id="customer-address" placeholder="Shipping Address" required></textarea>
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideAdminModal()">&times;</span>
+            <h2>Add New Product</h2>
+            <form id="product-form" onsubmit="addProduct(event)">
+                <input type="text" id="prod-name" placeholder="Product Name" required>
+                <input type="number" id="prod-price" placeholder="Price" step="0.01" required>
+                <input type="url" id="prod-image" placeholder="Image URL (e.g. https://...)" required>
+                <select id="prod-category" required>
+                    <option value="electronics">Electronics</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="home">Home & Kitchen</option>
+                    <option value="books">Books</option>
+                </select>
+                <textarea id="prod-desc" placeholder="Description" required></textarea>
+                <button type="submit">Add Product</button>
+            </form>
+            <button onclick="clearProducts()" class="clear-btn">Clear All Products</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
